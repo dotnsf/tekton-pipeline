@@ -1,0 +1,11 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: akpfs
+spec:
+  serviceAccountName: tekton-triggers-sa
+  triggers:
+    - bindings:
+        - ref: my-tekton-pipeline-project-pipeline-triggerbinding
+      template:
+        ref: my-tekton-pipeline-project-triggertemplate

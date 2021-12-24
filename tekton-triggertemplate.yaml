@@ -1,0 +1,18 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: my-tekton-pipeline-project-triggertemplate
+spec:
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: my-tekton-pipeline-project-pipeline-run-
+      spec:
+        serviceAccountName: build-bot
+        pipelineRef:
+          name: my-tekton-pipeline-project-pipeline
+        workspaces:
+          - name: pipeline-shared-data
+            persistentVolumeClaim:
+              claimName: my-tekton-pipeline-pvc

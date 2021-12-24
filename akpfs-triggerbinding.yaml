@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: my-tekton-pipeline-project-pipeline-triggerbinding
+spec:
+  params:
+    - name: namespace
+      value: my-tekton-pipeline-project
+    - name: gitrepositoryurl
+      value: $(body.repository.url)
+    - name: gitrepositoryname
+      value: $(body.repository.name)

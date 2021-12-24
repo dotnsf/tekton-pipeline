@@ -1,0 +1,36 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: my-tekton-pipeline-project-imagestream
+  namespace: my-tekton-pipeline-project
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: builder
+rules:
+  - apiGroups:
+      - image.openshift.io
+    resources:
+      - imagestreams
+    verbs:
+      - "*"
+  - apiGroups:
+      - image.openshift.io
+    resources:
+      - "imagestreams/layers"
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: builder
+subjects:
+  - kind: ServiceAccount
+    name: build-bot
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: builder
+

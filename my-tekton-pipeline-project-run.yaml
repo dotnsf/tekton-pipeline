@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: my-tekton-pipeline-project-pipeline-run-
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: my-tekton-pipeline-project-pipeline
+  workspaces:
+    - name: pipeline-shared-data
+      persistentVolumeClaim:
+        claimName: my-tekton-pipeline-pvc
+
